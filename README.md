@@ -13,9 +13,11 @@ void teste(){   //conta como uma linha de codigo
     }
     
     
-    caso exista quebra de linha:
-    
-public class Main extends 
+ 
+ 
+ caso exista quebra de linha:
+   
+public class Main extends <br>
 Object{         //duas linhas de código
 
 }
