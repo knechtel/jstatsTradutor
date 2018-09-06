@@ -120,7 +120,7 @@ palavraDigito palavra[0-9]+
         addToken("\n");
         bufferFree();
         }
-"}"                                { numLines++;cntChave--;}
+"}"                                { ;cntChave--;}
 ";"                                { 
                                         bufferFree();
 }

@@ -919,7 +919,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 123 "jstat.l"
-{ numLines++;cntChave--;}
+{ ;cntChave--;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -2016,7 +2016,7 @@ int main(int argc, char *argv[]){
     palavrasArrayFree();
     bufferFree();
     bufferArrayFree();
-    printf("Numero total de linhas = %d \n",numLines+numLinesComentario);
+    printf("Numero total de linhas = %d \n",numLines);
     printf("Numero total de linhas em branco = %d \n",(numLines-numLinesComentario)-linhasDeCodigo);
     printf("Numero de linhas comentadas = %d \n",numLinesComentario);
     printf("Numero de literal String = %d \n",numLiteral);

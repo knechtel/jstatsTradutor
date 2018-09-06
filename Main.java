@@ -1,8 +1,6 @@
 
 
-public class Main 
-	
-		extends Object{
+public class Main {
 
 
 
@@ -11,7 +9,7 @@ public class Main
 
 
 	
-public String vai(){
+publi String vai(){
      return 0;
     }
 
@@ -19,7 +17,7 @@ public String vai(){
    public String vaiDois(){
         return 0
        }
-	/*
-		*/
+	
+	
 
 }
