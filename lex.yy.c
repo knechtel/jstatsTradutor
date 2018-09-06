@@ -543,7 +543,7 @@ void palavrasFree(){
 }
 
 
-void addPalavra(char * palavra){
+void addToken(char * palavra){
     palavraCnt++;
     if(arrayPalavras==NULL)
     arrayPalavras = (char**) malloc(sizeof(char*) * 1000);
@@ -896,7 +896,7 @@ YY_RULE_SETUP
 case 8:
 YY_RULE_SETUP
 #line 108 "jstat.l"
-{  if(cntChave==0)addPalavra(yytext);}
+{  if(cntChave==0)addToken(yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -907,10 +907,10 @@ YY_RULE_SETUP
         for(int i=0;i<bufferCnt;i++){
             if(arrayBuffer[i]!=NULL){
                 printf(" %s ",arrayBuffer[i]);
-                addPalavra(arrayBuffer[i]);
+                addToken(arrayBuffer[i]);
             }
         }}
-        addPalavra("\n");
+        addToken("\n");
         bufferFree();
         }
 	YY_BREAK
@@ -929,12 +929,12 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 125 "jstat.l"
-{ if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+{ if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 126 "jstat.l"
-{ if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+{ if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
@@ -952,7 +952,7 @@ YY_RULE_SETUP
     if(cntChave==1)
         addBuffer(yytext);
     if(cntChave==0)
-        addPalavra(yytext); }
+        addToken(yytext); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
@@ -961,7 +961,7 @@ YY_RULE_SETUP
     if(containesLineToken(numLines)==0){
         arrayToken[indexArrayToken].line = numLines;
         indexArrayToken++;}
-    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
@@ -970,7 +970,7 @@ YY_RULE_SETUP
     if(containesLineToken(numLines)==0){
     arrayToken[indexArrayToken].line = numLines;
         indexArrayToken++;}
-    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
@@ -2001,7 +2001,6 @@ int main(int argc, char *argv[]){
               ctl++;
               if(ctl>1){
                 arrayToken[i].line=0;
-                printf("aqui valor %d \n ",arrayToken[i].line);
                 linhasDeCodigo++;
                 ctl=0;
               }

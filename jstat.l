@@ -23,6 +23,8 @@ struct token{
 };
 
 struct token arrayToken[100];
+
+
 int indexArrayToken     = 0;
 void palavrasArrayFree(){
     free(arrayPalavras);
@@ -48,7 +50,7 @@ void palavrasFree(){
 }
 
 
-void addPalavra(char * palavra){
+void addToken(char * palavra){
     palavraCnt++;
     if(arrayPalavras==NULL)
     arrayPalavras = (char**) malloc(sizeof(char*) * 1000);
@@ -105,25 +107,25 @@ palavraDigito palavra[0-9]+
 <test>[\^{}}\n]*                   { numLinesComentario++;}
 <test>"*/"  BEGIN(INITIAL);        { numLines++;}
 "\n"                               { numLines++;   }
-"class"                            {  if(cntChave==0)addPalavra(yytext);}
+"class"                            {  if(cntChave==0)addToken(yytext);}
 "{"                                {cntChave++;contLinesCode++;
     if(arrayBuffer!=NULL)
     {
         for(int i=0;i<bufferCnt;i++){
             if(arrayBuffer[i]!=NULL){
                 printf(" %s ",arrayBuffer[i]);
-                addPalavra(arrayBuffer[i]);
+                addToken(arrayBuffer[i]);
             }
         }}
-        addPalavra("\n");
+        addToken("\n");
         bufferFree();
         }
 "}"                                { cntChave--;}
 ";"                                { contLinesCode++;
                                         bufferFree();
 }
-"("                                { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
-")"                                { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+"("                                { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
+")"                                { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 "="                                {    }
 {palavra}                          {
     
@@ -133,18 +135,18 @@ palavraDigito palavra[0-9]+
     if(cntChave==1)
         addBuffer(yytext);
     if(cntChave==0)
-        addPalavra(yytext); }
+        addToken(yytext); }
 {palavraDigito}                          {
     if(containesLineToken(numLines)==0){
         arrayToken[indexArrayToken].line = numLines;
         indexArrayToken++;}
-    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 
 {nomeInicioFrase}                  {
     if(containesLineToken(numLines)==0){
     arrayToken[indexArrayToken].line = numLines;
         indexArrayToken++;}
-    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addPalavra(yytext); }
+    if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 
 
 
@@ -177,7 +179,6 @@ int main(int argc, char *argv[]){
               ctl++;
               if(ctl>1){
                 arrayToken[i].line=0;
-                printf("aqui valor %d \n ",arrayToken[i].line);
                 linhasDeCodigo++;
                 ctl=0;
               }
