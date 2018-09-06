@@ -518,6 +518,8 @@ struct token{
 };
 
 struct token arrayToken[100];
+
+
 int indexArrayToken     = 0;
 void palavrasArrayFree(){
     free(arrayPalavras);
@@ -582,7 +584,7 @@ void addBuffer(char * palavra){
 
 
 
-#line 586 "lex.yy.c"
+#line 588 "lex.yy.c"
 
 #define INITIAL 0
 #define test 1
@@ -767,12 +769,12 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 96 "jstat.l"
+#line 98 "jstat.l"
 
 
 
 
-#line 776 "lex.yy.c"
+#line 778 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -857,50 +859,50 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 100 "jstat.l"
+#line 102 "jstat.l"
 BEGIN(literal);                  { }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 101 "jstat.l"
+#line 103 "jstat.l"
 { }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 102 "jstat.l"
+#line 104 "jstat.l"
 BEGIN(INITIAL);        { numLiteral++; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 104 "jstat.l"
+#line 106 "jstat.l"
 BEGIN(test);                  {  }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 105 "jstat.l"
+#line 107 "jstat.l"
 { numLinesComentario++;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 106 "jstat.l"
+#line 108 "jstat.l"
 BEGIN(INITIAL);        { numLines++;}
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 107 "jstat.l"
+#line 109 "jstat.l"
 { numLines++;   }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 108 "jstat.l"
+#line 110 "jstat.l"
 {  if(cntChave==0)addToken(yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 109 "jstat.l"
+#line 111 "jstat.l"
 {cntChave++;contLinesCode++;
     if(arrayBuffer!=NULL)
     {
@@ -916,34 +918,34 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 121 "jstat.l"
-{ cntChave--;}
+#line 123 "jstat.l"
+{ numLines++;cntChave--;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 122 "jstat.l"
-{ contLinesCode++;
+#line 124 "jstat.l"
+{ 
                                         bufferFree();
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 125 "jstat.l"
+#line 127 "jstat.l"
 { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 126 "jstat.l"
+#line 128 "jstat.l"
 { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 127 "jstat.l"
+#line 129 "jstat.l"
 {    }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 128 "jstat.l"
+#line 130 "jstat.l"
 {
     
     if(containesLineToken(numLines)==0){
@@ -956,7 +958,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 137 "jstat.l"
+#line 139 "jstat.l"
 {
     if(containesLineToken(numLines)==0){
         arrayToken[indexArrayToken].line = numLines;
@@ -965,7 +967,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 143 "jstat.l"
+#line 145 "jstat.l"
 {
     if(containesLineToken(numLines)==0){
     arrayToken[indexArrayToken].line = numLines;
@@ -974,10 +976,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 158 "jstat.l"
+#line 160 "jstat.l"
 ECHO;
 	YY_BREAK
-#line 981 "lex.yy.c"
+#line 983 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(test):
 case YY_STATE_EOF(literal):
@@ -1977,7 +1979,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 158 "jstat.l"
+#line 160 "jstat.l"
 
 
 
@@ -1998,12 +2000,13 @@ int main(int argc, char *argv[]){
     
         for(int j=0 ;j<indexArrayToken;j++){
             if(arrayToken[i].line==arrayToken[j].line){
-              ctl++;
-              if(ctl>1){
+                 ctl++;
+              if(ctl> 1){
                 arrayToken[i].line=0;
                 linhasDeCodigo++;
                 ctl=0;
               }
+           
              }
         }
     }
@@ -2013,7 +2016,8 @@ int main(int argc, char *argv[]){
     palavrasArrayFree();
     bufferFree();
     bufferArrayFree();
-    printf("Numero de linhas = %d \n",numLines+numLinesComentario);
+    printf("Numero total de linhas = %d \n",numLines+numLinesComentario);
+    printf("Numero total de linhas em branco = %d \n",(numLines-numLinesComentario)-linhasDeCodigo);
     printf("Numero de linhas comentadas = %d \n",numLinesComentario);
     printf("Numero de literal String = %d \n",numLiteral);
     printf("Numero de linhas de codigo = %d \n",linhasDeCodigo);

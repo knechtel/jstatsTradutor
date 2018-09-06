@@ -1,34 +1,25 @@
 
 
-public class Main extends Object{
+public class Main 
 	
+		extends Object{
 
-	String texto = "literal";
-	String textoDois = "literal";
 
-	public static void main(String args[])
-	{
-		if(texto.equals(textoDois)){
-			
-		}else{
-			retun 0;
-		}
-			
-		
+
+
+
+
+
 	
-		/*
-		
-		
+public String vai(){
+     return 0;
+    }
+
+
+   public String vaiDois(){
+        return 0
+       }
+	/*
 		*/
-	
-	}
-}
 
-
-
-class Test{
-	String test(){
-		return "maiquel";
-	}
-	
 }

@@ -120,8 +120,8 @@ palavraDigito palavra[0-9]+
         addToken("\n");
         bufferFree();
         }
-"}"                                { cntChave--;}
-";"                                { contLinesCode++;
+"}"                                { numLines++;cntChave--;}
+";"                                { 
                                         bufferFree();
 }
 "("                                { if(cntChave==1)addBuffer(yytext); if(cntChave==0)addToken(yytext); }
@@ -176,12 +176,13 @@ int main(int argc, char *argv[]){
     
         for(int j=0 ;j<indexArrayToken;j++){
             if(arrayToken[i].line==arrayToken[j].line){
-              ctl++;
-              if(ctl>1){
+                 ctl++;
+              if(ctl> 1){
                 arrayToken[i].line=0;
                 linhasDeCodigo++;
                 ctl=0;
               }
+           
              }
         }
     }
@@ -191,7 +192,8 @@ int main(int argc, char *argv[]){
     palavrasArrayFree();
     bufferFree();
     bufferArrayFree();
-    printf("Numero de linhas = %d \n",numLines+numLinesComentario);
+    printf("Numero total de linhas = %d \n",numLines);
+    printf("Numero total de linhas em branco = %d \n",(numLines-numLinesComentario)-linhasDeCodigo);
     printf("Numero de linhas comentadas = %d \n",numLinesComentario);
     printf("Numero de literal String = %d \n",numLiteral);
     printf("Numero de linhas de codigo = %d \n",linhasDeCodigo);
