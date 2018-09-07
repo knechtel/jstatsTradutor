@@ -374,10 +374,10 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[50] =
     {   0,
-       17,   17,    5,    5,    2,    2,    0,    0,   19,   18,
-        7,    1,   12,   13,   18,   11,   14,   17,   15,   15,
-       15,    9,   10,    5,   18,    5,    5,    5,    2,    3,
-        4,   17,   15,   15,   15,    5,    6,    5,    2,   15,
+       17,   17,    6,    6,    3,    3,    0,    0,   19,   18,
+        1,    2,   12,   13,   18,   11,   14,   17,   15,   15,
+       15,    9,   10,    1,   18,    6,    6,    6,    3,    4,
+        5,   17,   15,   15,   15,    6,    7,    6,    3,   15,
        15,   15,   15,    8,   15,   15,   15,   16,    0
     } ;
 
@@ -772,9 +772,7 @@ YY_DECL
 #line 98 "jstat.l"
 
 
-
-
-#line 778 "lex.yy.c"
+#line 776 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -858,42 +856,42 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
+YY_RULE_SETUP
+#line 100 "jstat.l"
+{ numLines++;   }
+	YY_BREAK
+case 2:
 YY_RULE_SETUP
 #line 102 "jstat.l"
 BEGIN(literal);                  { }
 	YY_BREAK
-case 2:
-/* rule 2 can match eol */
+case 3:
+/* rule 3 can match eol */
 YY_RULE_SETUP
 #line 103 "jstat.l"
 { }
 	YY_BREAK
-case 3:
+case 4:
 YY_RULE_SETUP
 #line 104 "jstat.l"
 BEGIN(INITIAL);        { numLiteral++; }
 	YY_BREAK
-case 4:
+case 5:
 YY_RULE_SETUP
 #line 106 "jstat.l"
 BEGIN(test);                  {  }
 	YY_BREAK
-case 5:
-/* rule 5 can match eol */
+case 6:
+/* rule 6 can match eol */
 YY_RULE_SETUP
 #line 107 "jstat.l"
 { numLinesComentario++;}
 	YY_BREAK
-case 6:
+case 7:
 YY_RULE_SETUP
 #line 108 "jstat.l"
-BEGIN(INITIAL);        { numLines++;}
-	YY_BREAK
-case 7:
-/* rule 7 can match eol */
-YY_RULE_SETUP
-#line 109 "jstat.l"
-{ numLines++;   }
+BEGIN(INITIAL);        { }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
@@ -979,7 +977,7 @@ YY_RULE_SETUP
 #line 160 "jstat.l"
 ECHO;
 	YY_BREAK
-#line 983 "lex.yy.c"
+#line 981 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(test):
 case YY_STATE_EOF(literal):
@@ -2016,7 +2014,7 @@ int main(int argc, char *argv[]){
     palavrasArrayFree();
     bufferFree();
     bufferArrayFree();
-    printf("Numero total de linhas = %d \n",numLines);
+    printf("Numero total de linhas = %d \n",numLines+numLinesComentario);
     printf("Numero total de linhas em branco = %d \n",(numLines-numLinesComentario)-linhasDeCodigo);
     printf("Numero de linhas comentadas = %d \n",numLinesComentario);
     printf("Numero de literal String = %d \n",numLiteral);

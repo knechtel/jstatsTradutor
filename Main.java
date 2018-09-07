@@ -1,15 +1,30 @@
 
-
 public class Main {
+/*
+ 
+ 
+ 
+ 
+  */
+ 
 
 
 
+ 
+ 
 
+
+
+ 
+ 
+ 
+ 
+   
 
 
 
 	
-publi String vai(){
+public String vai(){
      return 0;
     }
 

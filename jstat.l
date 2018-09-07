@@ -97,7 +97,7 @@ palavra [a-z]+
 palavraDigito palavra[0-9]+
 %%
 
-
+"\n"                               { numLines++;   }
 
 "\"" BEGIN(literal);                  { }
 <literal>[\^{}}\n]*                   { }
@@ -105,8 +105,8 @@ palavraDigito palavra[0-9]+
 
 "/*" BEGIN(test);                  {  }
 <test>[\^{}}\n]*                   { numLinesComentario++;}
-<test>"*/"  BEGIN(INITIAL);        { numLines++;}
-"\n"                               { numLines++;   }
+<test>"*/"  BEGIN(INITIAL);        { }
+
 "class"                            {  if(cntChave==0)addToken(yytext);}
 "{"                                {cntChave++;contLinesCode++;
     if(arrayBuffer!=NULL)
@@ -192,7 +192,7 @@ int main(int argc, char *argv[]){
     palavrasArrayFree();
     bufferFree();
     bufferArrayFree();
-    printf("Numero total de linhas = %d \n",numLines);
+    printf("Numero total de linhas = %d \n",numLines+numLinesComentario);
     printf("Numero total de linhas em branco = %d \n",(numLines-numLinesComentario)-linhasDeCodigo);
     printf("Numero de linhas comentadas = %d \n",numLinesComentario);
     printf("Numero de literal String = %d \n",numLiteral);
